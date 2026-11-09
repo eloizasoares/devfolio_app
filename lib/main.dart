@@ -4,6 +4,12 @@ void main() {
   runApp(const DevFolioApp());
 }
 
+const roxo = Color(0xFF8B5CF6);
+const fundo = Color(0xFF100D1B);
+const card = Color(0xFF1D1830);
+const texto = Color(0xFFF5F3FF);
+const textoSecundario = Color(0xFFAAA3BE);
+
 class DevFolioApp extends StatelessWidget {
   const DevFolioApp({super.key});
 
@@ -14,279 +20,485 @@ class DevFolioApp extends StatelessWidget {
       title: 'DevFolio',
       theme: ThemeData(
         useMaterial3: true,
-        colorSchemeSeed: const Color(0xFF6750A4),
-        scaffoldBackgroundColor: const Color(0xFFF5F3FA),
+        scaffoldBackgroundColor: fundo,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: roxo,
+          brightness: Brightness.dark,
+        ),
       ),
-      home: const PerfilScreen(),
+      home: const HomeScreen(),
     );
   }
 }
 
 // =====================================================
-// TELA 01 - PERFIL E CRACHA DAS DESENVOLVEDORAS
+// TELA 01 - HOME / APRESENTACAO
 // =====================================================
 
-class PerfilScreen extends StatelessWidget {
-  const PerfilScreen({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'DevFolio',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        backgroundColor: const Color(0xFFF5F3FA),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.dashboard_outlined),
-            tooltip: 'Dashboard de projetos',
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const DashboardScreen(),
-                ),
-              );
-            },
-          ),
-        ],
-      ),
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 440),
-            child: Card(
-              elevation: 5,
-              shadowColor: Colors.deepPurple.withValues(alpha: 0.2),
-              clipBehavior: Clip.antiAlias,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(24),
+      backgroundColor: fundo,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // ===== MENU SUPERIOR =====
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 22),
+              decoration: const BoxDecoration(
+                border: Border(bottom: BorderSide(color: Color(0xFF302642))),
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
+              child: Row(
                 children: [
-                  // ===== CABECALHO COM GRADIENTE =====
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(vertical: 28),
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0xFF6750A4), Color(0xFF9A7BE7)],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                    ),
-                    child: Column(
-                      children: [
-                        const CircleAvatar(
-                          radius: 52,
-                          backgroundColor: Colors.white,
-                          child: CircleAvatar(
-                            radius: 47,
-                            backgroundColor: Color(0xFFE9DFFF),
-                            child: Icon(
-                              Icons.code_rounded,
-                              size: 52,
-                              color: Color(0xFF6750A4),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 14),
-                        const Text(
-                          'Gaby & Eloh',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(height: 5),
-                        const Text(
-                          'Desenvolvedoras em formacao',
-                          style: TextStyle(fontSize: 14, color: Colors.white),
-                        ),
-                        const SizedBox(height: 12),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 14,
-                            vertical: 6,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.2),
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: Colors.white70),
-                          ),
-                          child: const Text(
-                            'DEVFOLIO TEAM',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 11,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 1.2,
-                            ),
-                          ),
-                        ),
-                      ],
+                  const Icon(Icons.terminal, color: roxo, size: 30),
+                  const SizedBox(width: 10),
+                  const Text(
+                    'DevFolio.',
+                    style: TextStyle(
+                      fontSize: 23,
+                      fontWeight: FontWeight.bold,
+                      color: texto,
                     ),
                   ),
-
-                  // ===== INFORMACOES DA EQUIPE =====
-                  Padding(
-                    padding: const EdgeInsets.all(22),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Sobre nosso projeto',
-                          style: TextStyle(
-                            fontSize: 19,
-                            fontWeight: FontWeight.bold,
-                          ),
+                  const Spacer(),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text('Início', style: TextStyle(color: texto)),
+                  ),
+                  const SizedBox(width: 12),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const DashboardScreen(),
                         ),
-                        const SizedBox(height: 8),
-                        const Text(
-                          'Somos Gaby e Eloh, estudantes de tecnologia '
-                          'e desenvolvedoras em formacao. Criamos este '
-                          'portfolio para apresentar nossos projetos, '
-                          'habilidades e conhecimentos em programacao.',
-                          style: TextStyle(height: 1.5, color: Colors.black87),
-                        ),
-
-                        const SizedBox(height: 22),
-
-                        // ===== HABILIDADES =====
-                        const Text(
-                          'Nossas habilidades',
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        const Wrap(
-                          spacing: 8,
-                          runSpacing: 8,
-                          children: [
-                            Chip(
-                              avatar: Icon(Icons.phone_android, size: 17),
-                              label: Text('Flutter'),
-                            ),
-                            Chip(
-                              avatar: Icon(Icons.code, size: 17),
-                              label: Text('Dart'),
-                            ),
-                            Chip(
-                              avatar: Icon(Icons.web, size: 17),
-                              label: Text('HTML/CSS'),
-                            ),
-                            Chip(
-                              avatar: Icon(Icons.storage, size: 17),
-                              label: Text('Banco de dados'),
-                            ),
-                          ],
-                        ),
-
-                        const SizedBox(height: 24),
-
-                        // ===== NOSSA EQUIPE =====
-                        const Text(
-                          'Nossa equipe',
-                          style: TextStyle(
-                            fontSize: 19,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 14),
-
-                        // ===== PERFIL DA GABY =====
-                        const IntegranteCard(
-                          nome: 'Gaby',
-                          inicial: 'G',
-                          descricao: 'Desenvolvedora em formacao',
-                          icone: Icons.code_rounded,
-                        ),
-
-                        const SizedBox(height: 14),
-
-                        // ===== PERFIL DA ELOH =====
-                        const IntegranteCard(
-                          nome: 'Eloh',
-                          inicial: 'E',
-                          descricao: 'Desenvolvedora em formacao',
-                          icone: Icons.laptop_mac_rounded,
-                        ),
-
-                        const SizedBox(height: 22),
-                        const Divider(),
-                        const SizedBox(height: 8),
-
-                        const Row(
-                          children: [
-                            Icon(
-                              Icons.school_outlined,
-                              color: Color(0xFF6750A4),
-                            ),
-                            SizedBox(width: 10),
-                            Expanded(
-                              child: Text(
-                                'Estudantes de desenvolvimento',
-                                style: TextStyle(fontSize: 13),
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        const SizedBox(height: 12),
-
-                        const Row(
-                          children: [
-                            Icon(
-                              Icons.groups_outlined,
-                              color: Color(0xFF6750A4),
-                            ),
-                            SizedBox(width: 10),
-                            Expanded(
-                              child: Text(
-                                'Projeto desenvolvido em dupla',
-                                style: TextStyle(fontSize: 13),
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        const SizedBox(height: 20),
-
-                        // ===== BOTAO DO DASHBOARD =====
-                        SizedBox(
-                          width: double.infinity,
-                          child: FilledButton.icon(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const DashboardScreen(),
-                                ),
-                              );
-                            },
-                            icon: const Icon(Icons.dashboard_outlined),
-                            label: const Text('Ver dashboard'),
-                            style: FilledButton.styleFrom(
-                              backgroundColor: const Color(0xFF6750A4),
-                              padding: const EdgeInsets.symmetric(vertical: 14),
-                            ),
-                          ),
-                        ),
-                      ],
+                      );
+                    },
+                    child: const Text(
+                      'Dashboard',
+                      style: TextStyle(color: textoSecundario),
                     ),
+                  ),
+                  const SizedBox(width: 12),
+                  FilledButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const DashboardScreen(),
+                        ),
+                      );
+                    },
+                    style: FilledButton.styleFrom(backgroundColor: roxo),
+                    child: const Text('Explorar projetos'),
                   ),
                 ],
               ),
             ),
-          ),
+
+            // ===== APRESENTACAO PRINCIPAL =====
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final largura = constraints.maxWidth;
+                final pequeno = largura < 650;
+
+                return Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: pequeno ? 24 : 70,
+                    vertical: pequeno ? 65 : 105,
+                  ),
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Color(0xFF171027),
+                        Color(0xFF100D1B),
+                        Color(0xFF201337),
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                  ),
+                  child: Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 1150),
+                      child: Flex(
+                        direction: pequeno ? Axis.vertical : Axis.horizontal,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: pequeno ? 0 : 3,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 15,
+                                    vertical: 9,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: roxo.withValues(alpha: 0.15),
+                                    borderRadius: BorderRadius.circular(30),
+                                    border: Border.all(
+                                      color: roxo.withValues(alpha: 0.4),
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    'PORTFÓLIO DE DESENVOLVIMENTO',
+                                    style: TextStyle(
+                                      color: Color(0xFFC4A8FF),
+                                      fontSize: 11,
+                                      letterSpacing: 1.5,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+
+                                const SizedBox(height: 28),
+
+                                const Text(
+                                  'Transformando ideias em',
+                                  style: TextStyle(
+                                    color: texto,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+
+                                const SizedBox(height: 5),
+
+                                const Text(
+                                  'experiências digitais.',
+                                  style: TextStyle(
+                                    color: Color(0xFFB794FF),
+                                    fontSize: 38,
+                                    fontWeight: FontWeight.bold,
+                                    height: 1.15,
+                                  ),
+                                ),
+
+                                const SizedBox(height: 25),
+
+                                const Text(
+                                  'Somos Gaby e Eloh, estudantes de '
+                                  'tecnologia apaixonadas por criatividade, '
+                                  'programação e desenvolvimento de soluções '
+                                  'digitais.',
+                                  style: TextStyle(
+                                    color: textoSecundario,
+                                    fontSize: 16,
+                                    height: 1.8,
+                                  ),
+                                ),
+
+                                const SizedBox(height: 32),
+
+                                Wrap(
+                                  spacing: 12,
+                                  runSpacing: 12,
+                                  children: [
+                                    FilledButton.icon(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) =>
+                                                const DashboardScreen(),
+                                          ),
+                                        );
+                                      },
+                                      icon: const Icon(Icons.arrow_forward),
+                                      label: const Text('Conhecer projetos'),
+                                      style: FilledButton.styleFrom(
+                                        backgroundColor: roxo,
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 22,
+                                          vertical: 17,
+                                        ),
+                                      ),
+                                    ),
+                                    OutlinedButton.icon(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) =>
+                                                const DashboardScreen(),
+                                          ),
+                                        );
+                                      },
+                                      icon: const Icon(Icons.grid_view),
+                                      label: const Text('Dashboard'),
+                                      style: OutlinedButton.styleFrom(
+                                        foregroundColor: texto,
+                                        side: const BorderSide(
+                                          color: Color(0xFF55456F),
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 20,
+                                          vertical: 17,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          if (!pequeno) const SizedBox(width: 65),
+                          if (pequeno) const SizedBox(height: 45),
+
+                          // ===== BLOCO VISUAL =====
+                          Expanded(
+                            flex: pequeno ? 0 : 2,
+                            child: Container(
+                              width: pequeno ? double.infinity : null,
+                              padding: const EdgeInsets.all(28),
+                              decoration: BoxDecoration(
+                                color: card,
+                                borderRadius: BorderRadius.circular(25),
+                                border: Border.all(
+                                  color: const Color(0xFF44345E),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: roxo.withValues(alpha: 0.15),
+                                    blurRadius: 35,
+                                    spreadRadius: 2,
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Row(
+                                    children: [
+                                      Icon(
+                                        Icons.circle,
+                                        color: Color(0xFF56D99B),
+                                        size: 10,
+                                      ),
+                                      SizedBox(width: 8),
+                                      Text(
+                                        'NOSSA EQUIPE',
+                                        style: TextStyle(
+                                          color: textoSecundario,
+                                          fontSize: 11,
+                                          letterSpacing: 2,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                  const SizedBox(height: 28),
+
+                                  const Text(
+                                    '01',
+                                    style: TextStyle(
+                                      color: Color(0xFFB794FF),
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  const Text(
+                                    'Gaby',
+                                    style: TextStyle(
+                                      color: texto,
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const Text(
+                                    'Desenvolvedora em formação',
+                                    style: TextStyle(
+                                      color: textoSecundario,
+                                      fontSize: 13,
+                                    ),
+                                  ),
+
+                                  const Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 22),
+                                    child: Divider(color: Color(0xFF403451)),
+                                  ),
+
+                                  const Text(
+                                    '02',
+                                    style: TextStyle(
+                                      color: Color(0xFFB794FF),
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  const Text(
+                                    'Eloh',
+                                    style: TextStyle(
+                                      color: texto,
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const Text(
+                                    'Desenvolvedora em formação',
+                                    style: TextStyle(
+                                      color: textoSecundario,
+                                      fontSize: 13,
+                                    ),
+                                  ),
+
+                                  const SizedBox(height: 28),
+
+                                  Container(
+                                    width: double.infinity,
+                                    padding: const EdgeInsets.all(15),
+                                    decoration: BoxDecoration(
+                                      color: roxo.withValues(alpha: 0.15),
+                                      borderRadius: BorderRadius.circular(14),
+                                    ),
+                                    child: const Text(
+                                      'Duas desenvolvedoras. '
+                                      'Um portfólio. Infinitas ideias.',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Color(0xFFD7C5FF),
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+
+            // ===== TECNOLOGIAS =====
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 55),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 1100),
+                  child: Column(
+                    children: [
+                      const Text(
+                        'TECNOLOGIAS',
+                        style: TextStyle(
+                          color: Color(0xFFB794FF),
+                          letterSpacing: 3,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      const Text(
+                        'Ferramentas que utilizamos',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: texto,
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+
+                      Wrap(
+                        alignment: WrapAlignment.center,
+                        spacing: 15,
+                        runSpacing: 15,
+                        children: const [
+                          TecnologiaCard(
+                            icone: Icons.phone_android,
+                            nome: 'Flutter',
+                          ),
+                          TecnologiaCard(icone: Icons.code, nome: 'Dart'),
+                          TecnologiaCard(
+                            icone: Icons.language,
+                            nome: 'HTML e CSS',
+                          ),
+                          TecnologiaCard(
+                            icone: Icons.storage,
+                            nome: 'Banco de dados',
+                          ),
+                          TecnologiaCard(
+                            icone: Icons.terminal,
+                            nome: 'Git e GitHub',
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            // ===== CHAMADA PARA PROJETOS =====
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 55),
+              color: const Color(0xFF191329),
+              child: Column(
+                children: [
+                  const Text(
+                    'NOSSOS TRABALHOS',
+                    style: TextStyle(
+                      color: Color(0xFFB794FF),
+                      letterSpacing: 3,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  const Text(
+                    'Ideias que saíram do papel.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: texto,
+                      fontSize: 27,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  const Text(
+                    'Conheça alguns dos projetos desenvolvidos '
+                    'durante nossa jornada na tecnologia.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: textoSecundario, height: 1.6),
+                  ),
+                  const SizedBox(height: 28),
+                  FilledButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const DashboardScreen(),
+                        ),
+                      );
+                    },
+                    style: FilledButton.styleFrom(
+                      backgroundColor: roxo,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 25,
+                        vertical: 16,
+                      ),
+                    ),
+                    child: const Text('Explorar portfólio'),
+                  ),
+                ],
+              ),
+            ),
+
+            const Rodape(),
+          ],
         ),
       ),
     );
@@ -294,75 +506,7 @@ class PerfilScreen extends StatelessWidget {
 }
 
 // =====================================================
-// WIDGET - CARD DE INTEGRANTE
-// =====================================================
-
-class IntegranteCard extends StatelessWidget {
-  final String nome;
-  final String inicial;
-  final String descricao;
-  final IconData icone;
-
-  const IntegranteCard({
-    super.key,
-    required this.nome,
-    required this.inicial,
-    required this.descricao,
-    required this.icone,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE4DDF4)),
-      ),
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 27,
-            backgroundColor: const Color(0xFFE9DFFF),
-            child: Text(
-              inicial,
-              style: const TextStyle(
-                color: Color(0xFF6750A4),
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          const SizedBox(width: 13),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  nome,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  descricao,
-                  style: const TextStyle(fontSize: 12, color: Colors.black54),
-                ),
-              ],
-            ),
-          ),
-          Icon(icone, color: const Color(0xFF6750A4), size: 25),
-        ],
-      ),
-    );
-  }
-}
-
-// =====================================================
-// TELA 02 - DASHBOARD DE PROJETOS E METRICAS
+// TELA 02 - DASHBOARD
 // =====================================================
 
 class DashboardScreen extends StatelessWidget {
@@ -371,184 +515,185 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: fundo,
       appBar: AppBar(
+        backgroundColor: fundo,
+        foregroundColor: texto,
         title: const Text(
-          'Dashboard de Projetos',
+          'DevFolio. / Dashboard',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        backgroundColor: const Color(0xFFF5F3FA),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(25),
         child: Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 700),
+            constraints: const BoxConstraints(maxWidth: 1100),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // ===== CABECALHO DO DASHBOARD =====
+                const Text(
+                  'PAINEL DA EQUIPE',
+                  style: TextStyle(
+                    color: Color(0xFFB794FF),
+                    letterSpacing: 3,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                const SizedBox(height: 12),
+
+                const Text(
+                  'Dashboard de projetos',
+                  style: TextStyle(
+                    color: texto,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                const SizedBox(height: 8),
+
+                const Text(
+                  'Acompanhe nossos projetos e conhecimentos.',
+                  style: TextStyle(color: textoSecundario),
+                ),
+
+                const SizedBox(height: 35),
+
+                // ===== ESTATISTICAS =====
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    final colunas = constraints.maxWidth > 650 ? 4 : 2;
+
+                    return GridView.count(
+                      crossAxisCount: colunas,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      crossAxisSpacing: 15,
+                      mainAxisSpacing: 15,
+                      childAspectRatio: 1.15,
+                      children: const [
+                        EstatisticaCard(
+                          titulo: 'Projetos',
+                          valor: '08',
+                          icone: Icons.folder_open,
+                          cor: Color(0xFF9B76F5),
+                          selo: 'TOTAL',
+                        ),
+                        EstatisticaCard(
+                          titulo: 'Concluídos',
+                          valor: '05',
+                          icone: Icons.check_circle_outline,
+                          cor: Color(0xFF50D6A0),
+                          selo: 'FINALIZADOS',
+                        ),
+                        EstatisticaCard(
+                          titulo: 'Em andamento',
+                          valor: '02',
+                          icone: Icons.pending_actions,
+                          cor: Color(0xFFFFB454),
+                          selo: 'ATIVOS',
+                        ),
+                        EstatisticaCard(
+                          titulo: 'Tecnologias',
+                          valor: '06',
+                          icone: Icons.code,
+                          cor: Color(0xFF5DB8FF),
+                          selo: 'SKILLS',
+                        ),
+                      ],
+                    );
+                  },
+                ),
+
+                const SizedBox(height: 45),
+
+                const Text(
+                  'Projetos recentes',
+                  style: TextStyle(
+                    color: texto,
+                    fontSize: 23,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                const ProjetoCard(
+                  nome: 'DevFolio App',
+                  descricao: 'Portfólio digital desenvolvido com Flutter.',
+                  categoria: 'Desenvolvimento Mobile',
+                  icone: Icons.laptop_mac,
+                  cor: Color(0xFF9B76F5),
+                  status: 'Em andamento',
+                ),
+
+                const SizedBox(height: 15),
+
+                const ProjetoCard(
+                  nome: 'EcoWatts',
+                  descricao: 'Monitoramento inteligente do consumo de energia.',
+                  categoria: 'Internet das Coisas',
+                  icone: Icons.bolt,
+                  cor: Color(0xFF50D6A0),
+                  status: 'Concluído',
+                ),
+
+                const SizedBox(height: 15),
+
+                const ProjetoCard(
+                  nome: 'Consulta CEP',
+                  descricao: 'Aplicativo para consulta de endereços.',
+                  categoria: 'Flutter e API',
+                  icone: Icons.location_on_outlined,
+                  cor: Color(0xFF5DB8FF),
+                  status: 'Concluído',
+                ),
+
+                const SizedBox(height: 40),
+
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.all(22),
+                  padding: const EdgeInsets.all(25),
                   decoration: BoxDecoration(
                     gradient: const LinearGradient(
-                      colors: [Color(0xFF6750A4), Color(0xFF9A7BE7)],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
+                      colors: [Color(0xFF50318D), Color(0xFF281A46)],
                     ),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(
-                        Icons.insights_rounded,
-                        color: Colors.white,
-                        size: 35,
+                      Text(
+                        'NOSSA EQUIPE',
+                        style: TextStyle(
+                          color: Color(0xFFD7C5FF),
+                          letterSpacing: 2,
+                          fontSize: 11,
+                        ),
                       ),
                       SizedBox(height: 12),
                       Text(
-                        'Portfólio de Gaby e Eloh',
+                        'Gaby & Eloh',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 22,
+                          fontSize: 28,
                           fontWeight: FontWeight.bold,
                         ),
-                      ),
-                      SizedBox(height: 6),
-                      Text(
-                        'Projetos e conquistas da nossa equipe',
-                        style: TextStyle(color: Colors.white70, fontSize: 14),
-                      ),
-                    ],
-                  ),
-                ),
-
-                const SizedBox(height: 26),
-
-                const Text(
-                  'Estatísticas da equipe',
-                  style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
-                ),
-
-                const SizedBox(height: 16),
-
-                // ===== GRADE DE ESTATISTICAS =====
-                GridView.count(
-                  crossAxisCount: 2,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  crossAxisSpacing: 14,
-                  mainAxisSpacing: 14,
-                  childAspectRatio: 1.05,
-                  children: const [
-                    BlocoEstatistica(
-                      titulo: 'Projetos',
-                      valor: '08',
-                      icone: Icons.folder_copy_outlined,
-                      cor: Color(0xFF6750A4),
-                      selo: 'TOTAL',
-                    ),
-                    BlocoEstatistica(
-                      titulo: 'Concluídos',
-                      valor: '05',
-                      icone: Icons.task_alt,
-                      cor: Color(0xFF21865B),
-                      selo: 'OK',
-                    ),
-                    BlocoEstatistica(
-                      titulo: 'Em andamento',
-                      valor: '02',
-                      icone: Icons.pending_actions,
-                      cor: Color(0xFFDA8A16),
-                      selo: 'ATIVO',
-                    ),
-                    BlocoEstatistica(
-                      titulo: 'Tecnologias',
-                      valor: '06',
-                      icone: Icons.code_rounded,
-                      cor: Color(0xFF2879B9),
-                      selo: 'SKILLS',
-                    ),
-                  ],
-                ),
-
-                const SizedBox(height: 28),
-
-                const Text(
-                  'Projetos recentes',
-                  style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
-                ),
-
-                const SizedBox(height: 14),
-
-                const ProjetoRecente(
-                  nome: 'DevFolio',
-                  descricao: 'Portfolio da dupla em Flutter',
-                  icone: Icons.person_outline,
-                  status: 'Em andamento',
-                  cor: Color(0xFF6750A4),
-                  responsaveis: 'Gaby e Eloh',
-                ),
-
-                const SizedBox(height: 12),
-
-                const ProjetoRecente(
-                  nome: 'EcoWatts',
-                  descricao: 'Monitoramento do consumo de energia',
-                  icone: Icons.bolt,
-                  status: 'Concluído',
-                  cor: Color(0xFF21865B),
-                  responsaveis: 'Projeto da equipe',
-                ),
-
-                const SizedBox(height: 12),
-
-                const ProjetoRecente(
-                  nome: 'Consulta CEP',
-                  descricao: 'Consulta de endereços por CEP',
-                  icone: Icons.location_on_outlined,
-                  status: 'Concluído',
-                  cor: Color(0xFF2879B9),
-                  responsaveis: 'Projeto de estudo',
-                ),
-
-                const SizedBox(height: 24),
-
-                // ===== IDENTIFICACAO DA DUPLA =====
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(18),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(18),
-                    border: Border.all(color: const Color(0xFFE4DDF4)),
-                  ),
-                  child: const Column(
-                    children: [
-                      Icon(
-                        Icons.groups_rounded,
-                        color: Color(0xFF6750A4),
-                        size: 32,
                       ),
                       SizedBox(height: 8),
                       Text(
-                        'Desenvolvido por Gaby e Eloh',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 5),
-                      Text(
-                        'Duas desenvolvedoras, um só portfólio.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.black54, fontSize: 13),
+                        'Desenvolvendo ideias e construindo '
+                        'novas experiências através da tecnologia.',
+                        style: TextStyle(color: Colors.white70, height: 1.6),
                       ),
                     ],
                   ),
                 ),
+
+                const SizedBox(height: 35),
               ],
             ),
           ),
@@ -559,17 +704,51 @@ class DashboardScreen extends StatelessWidget {
 }
 
 // =====================================================
-// WIDGET DE ESTATISTICA
+// CARD DE TECNOLOGIA
 // =====================================================
 
-class BlocoEstatistica extends StatelessWidget {
+class TecnologiaCard extends StatelessWidget {
+  final IconData icone;
+  final String nome;
+
+  const TecnologiaCard({super.key, required this.icone, required this.nome});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 18),
+      decoration: BoxDecoration(
+        color: card,
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(color: const Color(0xFF403451)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icone, color: roxo, size: 22),
+          const SizedBox(width: 10),
+          Text(
+            nome,
+            style: const TextStyle(color: texto, fontWeight: FontWeight.w600),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// =====================================================
+// CARD DE ESTATISTICA
+// =====================================================
+
+class EstatisticaCard extends StatelessWidget {
   final String titulo;
   final String valor;
   final IconData icone;
   final Color cor;
   final String selo;
 
-  const BlocoEstatistica({
+  const EstatisticaCard({
     super.key,
     required this.titulo,
     required this.valor,
@@ -581,54 +760,53 @@ class BlocoEstatistica extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 4,
+      elevation: 5,
+      color: card,
       shadowColor: cor.withValues(alpha: 0.15),
-      color: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18),
+        side: BorderSide(color: cor.withValues(alpha: 0.2)),
+      ),
       child: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.all(14),
+            padding: const EdgeInsets.all(15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icone, size: 29, color: cor),
+                Icon(icone, color: cor, size: 28),
                 const Spacer(),
                 Text(
                   valor,
                   style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
                     color: cor,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 5),
                 Text(
                   titulo,
-                  style: const TextStyle(fontSize: 12, color: Colors.black87),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(color: textoSecundario, fontSize: 12),
                 ),
               ],
             ),
           ),
-
-          // ===== SELO SOBREPOSTO =====
           Positioned(
-            top: 8,
+            top: 9,
             right: 8,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
               decoration: BoxDecoration(
-                color: cor.withValues(alpha: 0.12),
-                borderRadius: BorderRadius.circular(8),
+                color: cor.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(7),
               ),
               child: Text(
                 selo,
                 style: TextStyle(
                   color: cor,
-                  fontSize: 9,
+                  fontSize: 8,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -641,94 +819,123 @@ class BlocoEstatistica extends StatelessWidget {
 }
 
 // =====================================================
-// WIDGET DE PROJETO RECENTE
+// CARD DE PROJETO
 // =====================================================
 
-class ProjetoRecente extends StatelessWidget {
+class ProjetoCard extends StatelessWidget {
   final String nome;
   final String descricao;
+  final String categoria;
   final IconData icone;
-  final String status;
   final Color cor;
-  final String responsaveis;
+  final String status;
 
-  const ProjetoRecente({
+  const ProjetoCard({
     super.key,
     required this.nome,
     required this.descricao,
+    required this.categoria,
     required this.icone,
-    required this.status,
     required this.cor,
-    required this.responsaveis,
+    required this.status,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 2,
-      color: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Padding(
-        padding: const EdgeInsets.all(14),
-        child: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: cor.withValues(alpha: 0.12),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Icon(icone, color: cor, size: 27),
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: card,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: const Color(0xFF403451)),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              color: cor.withValues(alpha: 0.15),
+              borderRadius: BorderRadius.circular(14),
             ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    nome,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
+            child: Icon(icone, color: cor, size: 30),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  nome,
+                  style: const TextStyle(
+                    color: texto,
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    descricao,
-                    style: const TextStyle(color: Colors.black54, fontSize: 12),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  descricao,
+                  style: const TextStyle(
+                    color: textoSecundario,
+                    fontSize: 12,
+                    height: 1.5,
                   ),
-                  const SizedBox(height: 5),
-                  Text(
-                    responsaveis,
-                    style: const TextStyle(color: Colors.black54, fontSize: 11),
+                ),
+                const SizedBox(height: 7),
+                Text(
+                  categoria,
+                  style: TextStyle(
+                    color: cor,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
                   ),
-                  const SizedBox(height: 7),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 9,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        color: cor.withValues(alpha: 0.12),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Text(
-                        status,
-                        style: TextStyle(
-                          color: cor,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          const SizedBox(width: 8),
+          Icon(Icons.arrow_outward, color: cor),
+        ],
+      ),
+    );
+  }
+}
+
+// =====================================================
+// RODAPE
+// =====================================================
+
+class Rodape extends StatelessWidget {
+  const Rodape({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(28),
+      color: const Color(0xFF0B0912),
+      child: const Column(
+        children: [
+          Text(
+            'DevFolio.',
+            style: TextStyle(
+              color: Color(0xFFB794FF),
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 8),
+          Text(
+            'Desenvolvido por Gaby e Eloh',
+            style: TextStyle(color: textoSecundario, fontSize: 12),
+          ),
+          SizedBox(height: 8),
+          Text(
+            '© 2026 - Todos os direitos reservados.',
+            style: TextStyle(color: Color(0xFF777083), fontSize: 11),
+          ),
+        ],
       ),
     );
   }
